@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, TreePine } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,36 +10,46 @@ const Header = () => {
       setIsScrolled(window.scrollY > 0);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsMenuOpen(false);
     }
   };
 
   const navItems = [
-    { label: 'Home', id: 'home' },
-    { label: 'More', id: 'more' },
-    { label: 'Booking', id: 'booking' },
-    { label: 'Reviews', id: 'reviews' },
+    { label: "Home", id: "home" },
+    { label: "More", id: "more" },
+    { label: "Booking", id: "booking" },
+    { label: "Reviews", id: "reviews" },
   ];
 
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled || isMenuOpen ? 'bg-white shadow-md' : 'bg-white shadow-md'
+        isScrolled || isMenuOpen ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center space-x-2">
-            <img className="h-6 w-6 md:h-14 md:w-10 text-gray-700" src='assets\img\logo.png' />
-            <span className="text-lg md:text-xl font-bold text-emerald-800">Agroturism Bori</span>
+            <img
+              className="h-6 w-6 md:h-14 md:w-10 text-gray-700"
+              src="assets/img/logo.png" // Use forward slash for paths
+              alt="Logo"
+            />
+            <span
+              className={`text-lg md:text-xl font-bold ${
+                isScrolled ? "text-black" : "text-white"
+              }`}
+            >
+              Agroturism Bori
+            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -48,7 +58,9 @@ const Header = () => {
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 hover:text-emerald-600 transition-colors cursor-pointer"
+                className={`${isScrolled ? "text-black" : "text-white"} hover:${
+                  isScrolled ? "text-emerald-600" : "text-emerald-600"
+                } transition-colors cursor-pointer`}
               >
                 {item.label}
               </button>
@@ -67,7 +79,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t">
+          <nav className="md:hidden py-4 border-t transition-all duration-300 ease-in-out">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -84,4 +96,4 @@ const Header = () => {
   );
 };
 
-export default Header
+export default Header;
