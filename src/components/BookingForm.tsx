@@ -44,14 +44,14 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg  mx-auto flex flex-col sm:flex-row gap-6">
+    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg mx-auto flex flex-col sm:flex-row gap-6">
       {/* Booking Form */}
       <div className="w-full sm:w-1/2">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <input
               type="text"
-              placeholder="Your Name"
+              placeholder="Numele Dumneavoastra"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full px-4 py-2 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
@@ -61,7 +61,7 @@ const BookingForm = () => {
           <div>
             <input
               type="email"
-              placeholder="Your Email"
+              placeholder="Email-ul Dumneavoastra"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
@@ -70,11 +70,11 @@ const BookingForm = () => {
           </div>
           <div>
             <textarea
-              placeholder="Your Message"
+              placeholder="Mesajul Dumneavoastra"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="w-full px-4 py-2 text-sm sm:text-base border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-              rows={4}
+              rows={10}
               required
             />
           </div>
@@ -109,91 +109,98 @@ const BookingForm = () => {
                   Processing...
                 </>
               ) : (
-                "Submit Booking Request"
+                "Creeaza Rezervarea"
               )}
             </button>
           </div>
         </form>
       </div>
 
-      {/* Contact Information */}
-      <div className="w-full sm:w-1/2 bg-gray-50 p-4 rounded-lg shadow-lg">
-        <h3 className="text-xl font-semibold text-emerald-600 mb-4">
-          Contact Information
-        </h3>
-        <div className="space-y-3">
-          <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              className="w-6 h-6 text-emerald-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 8l7 7 7-7"
-              />
-            </svg>
-            <span className="ml-2">
-              <a href="tel:+40 741 680 696" className="text-lg">
-                Phone: +40 741 680 696
-              </a>
-            </span>
+      {/* Contact Information and Google Map */}
+      <div className="w-full sm:w-1/2 bg-gray-50 p-4 rounded-lg shadow-lg flex flex-col gap-6">
+        <div>
+          <h3 className="text-xl font-semibold text-emerald-600 mb-4">
+            Contact Information
+          </h3>
+          <div className="space-y-3">
+            <div className="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                className="w-6 h-6 text-emerald-600"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 8l7 7 7-7"
+                />
+              </svg>
+              <span className="ml-2">
+                <a href="tel:+40 741 680 696" className="text-lg">
+                  Phone: +40 741 680 696
+                </a>
+              </span>
+            </div>
+            <div className="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                className="w-6 h-6 text-emerald-600"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 12l-6 6m0 0l-6-6m6 6V5"
+                />
+              </svg>
+              <span className="ml-2">
+                <a
+                  href="mailto:stefancuandrei86@gmail.com?subject=Inquiry&body=Buna ziua , Doresc sa fac o rezervare"
+                  className="text-lg"
+                >
+                  Email: stefancuandrei86@gmail.com
+                </a>
+              </span>
+            </div>
+            <div className="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                className="w-6 h-6 text-emerald-600"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              <span className="ml-2">
+                Str. Boureni 117, Gura Humorului 725300{" "}
+              </span>
+            </div>
           </div>
-          <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              className="w-6 h-6 text-emerald-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 12l-6 6m0 0l-6-6m6 6V5"
-              />
-            </svg>
-            <span className="ml-2">Email: contact@example.com</span>
-          </div>
-          <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              className="w-6 h-6 text-emerald-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-            <span className="ml-2">Address: 123 Example St, City, Country</span>
-          </div>
-          <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              className="w-6 h-6 text-emerald-600"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 12l-6 6m0 0l-6-6m6 6V5"
-              />
-            </svg>
-            <span className="ml-2">Reception Phone: +1 234 567 891</span>
-          </div>
+        </div>
+
+        {/* Google Map iframe */}
+        <div className="h-64 w-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2691.925840988251!2d25.870393376742626!3d47.569231290556736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4735af1e626ec857%3A0x9d44eb1b9da73c0a!2sAgroturism%20Bori%20Punct%20Gastronomic%20Local!5e0!3m2!1sro!2sro!4v1739094916138!5m2!1sro!2sro"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </div>
     </div>
