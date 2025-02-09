@@ -109,7 +109,7 @@ const BookingForm = () => {
                   Processing...
                 </>
               ) : (
-                "Creeaza Rezervareagit"
+                "Creeaza Rezervare"
               )}
             </button>
           </div>
@@ -120,45 +120,21 @@ const BookingForm = () => {
       <div className="w-full sm:w-1/2 bg-gray-50 p-4 rounded-lg shadow-lg flex flex-col gap-6">
         <div>
           <h3 className="text-xl font-semibold text-emerald-600 mb-4">
-            Contact Information
+            Contactati-ne!
           </h3>
           <div className="space-y-3">
+            {/* Phone Icon */}
             <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                className="w-6 h-6 text-emerald-600"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 8l7 7 7-7"
-                />
-              </svg>
+              <i className="fas fa-phone-alt text-emerald-600 w-6 h-6"></i>
               <span className="ml-2">
                 <a href="tel:+40 741 680 696" className="text-lg">
                   Phone: +40 741 680 696
                 </a>
               </span>
             </div>
+            {/* Email Icon */}
             <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                className="w-6 h-6 text-emerald-600"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 12l-6 6m0 0l-6-6m6 6V5"
-                />
-              </svg>
+              <i className="fas fa-envelope text-emerald-600 w-6 h-6"></i>
               <span className="ml-2">
                 <a
                   href="mailto:stefancuandrei86@gmail.com?subject=Inquiry&body=Buna ziua , Doresc sa fac o rezervare"
@@ -168,23 +144,11 @@ const BookingForm = () => {
                 </a>
               </span>
             </div>
+            {/* Address Icon */}
             <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                className="w-6 h-6 text-emerald-600"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
+              <i className="fas fa-map-marker-alt text-emerald-600 w-6 h-6"></i>
               <span className="ml-2">
-                Str. Boureni 117, Gura Humorului 725300{" "}
+                Str. Boureni 117, Gura Humorului 725300
               </span>
             </div>
           </div>
