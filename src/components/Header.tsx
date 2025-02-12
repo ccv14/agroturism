@@ -18,7 +18,7 @@ const Header = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
+      setIsMenuOpen(false); // Close the menu after navigating
     }
   };
 
@@ -32,20 +32,20 @@ const Header = () => {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled || isMenuOpen ? "bg-white shadow-md" : "bg-transparent"
+        isScrolled || isMenuOpen ? "bg-white shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3 md:space-x-5">
             <img
-              className="h-6 w-6 md:h-14 md:w-10 text-gray-700"
-              src="assets/img/logo.png" // Use forward slash for paths
+              className="h-8 w-8 md:h-12 md:w-12 text-gray-700"
+              src="assets/img/logo.png"
               alt="Logo"
             />
             <span
-              className={`text-lg md:text-xl font-bold ${
-                isScrolled ? "text-black" : "text-white"
+              className={`text-lg md:text-2xl font-semibold ${
+                isMenuOpen || isScrolled ? "text-black" : "text-white"
               }`}
             >
               Agroturism Bori
@@ -58,9 +58,9 @@ const Header = () => {
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.id)}
-                className={`${isScrolled ? "text-black" : "text-white"} hover:${
-                  isScrolled ? "text-emerald-600" : "text-emerald-600"
-                } transition-colors cursor-pointer`}
+                className={`${
+                  isScrolled ? "text-black" : "text-white"
+                } hover:text-emerald-600 transition-colors cursor-pointer`}
               >
                 {item.label}
               </button>
@@ -69,7 +69,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700 p-2"
+            className={`md:hidden ${isMenuOpen ? "text-black" : "text-white"}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -79,7 +79,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t transition-all duration-300 ease-in-out">
+          <nav className="md:hidden py-4 border-t transition-all duration-300 ease-in-out bg-white">
             {navItems.map((item) => (
               <button
                 key={item.label}
