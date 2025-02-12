@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.ease-brand {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }

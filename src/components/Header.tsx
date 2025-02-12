@@ -6,14 +6,23 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Update isScrolled based on window scroll position
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isMenuOpen]);
+
+  // Scroll handler
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Track the section currently in view
+  // Intersection Observer for sections
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(
@@ -24,10 +33,7 @@ const Header = () => {
           }
         });
       },
-      {
-        threshold: 0.3,
-        rootMargin: "-20px 0px",
-      }
+      { threshold: 0.3, rootMargin: "-20px 0px" }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -50,12 +56,12 @@ const Header = () => {
     { label: "Reviews", id: "reviews" },
   ];
 
-  // Unified style function for text colors
+  // Text color generator
   const getTextColor = (id: string) => {
-    const activeColor = "text-emerald-600"; // Active color (green)
-    const baseColor = isScrolled ? "text-black" : "text-white"; // Default color for links changes to black if scrolled
-    const mobileBaseColor = "text-gray-800"; // Mobile color, set to a darker shade for visibility
-    const color = isMenuOpen ? mobileBaseColor : baseColor; // If menu is open, use mobileBaseColor
+    const activeColor = "text-emerald-600";
+    const baseColor = isScrolled ? "text-black" : "text-white";
+    const mobileBaseColor = "text-gray-800";
+    const color = isMenuOpen ? mobileBaseColor : baseColor;
 
     return `transition-colors duration-300 ${
       activeSection === id ? activeColor : color
@@ -75,7 +81,7 @@ const Header = () => {
             <img
               src="assets/img/logo.png"
               alt="Logo"
-              className="h-8 w-8 object-contain"
+              className="h-8 w-8 object-contain transition-transform duration-300 hover:scale-110"
             />
             <span
               className={`font-bold text-xl ${
@@ -104,7 +110,9 @@ const Header = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
-              className={`${isScrolled ? "text-black" : "text-white"}`} // Hamburger button becomes black on scroll
+              className={`${
+                isScrolled ? "text-black" : "text-white"
+              } transition-transform duration-300 hover:scale-110`}
             >
               <Menu size={24} strokeWidth={2} />
             </button>
@@ -113,37 +121,76 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 flex">
-          {/* Side menu */}
-          <div className="bg-white w-[30%] h-full p-6 space-y-8 flex flex-col justify-start">
-            <div className="flex items-center justify-between">
+      <div
+        className={`fixed inset-0 z-40 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          isMenuOpen
+            ? "bg-black/30 backdrop-blur-sm pointer-events-auto"
+            : "bg-transparent backdrop-blur-none pointer-events-none"
+        }`}
+      >
+        {/* Side menu with sliding animation */}
+        <div
+          className={`absolute left-0 top-0 h-full w-3/4 max-w-sm bg-white shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+            isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <div className="flex flex-col h-full p-6">
+            {/* Logo and Name at the Top */}
+            <div className="flex items-center space-x-3 mb-8">
+              <img
+                src="assets/img/logo.png"
+                alt="Logo"
+                className="h-8 w-8 object-contain"
+              />
+              <span className="text-2xl font-bold text-gray-800">
+                Agroturism Bori
+              </span>
+            </div>
+
+            {/* Close button */}
+            <div className="flex justify-end mb-8">
               <button
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Close menu"
-                className="text-gray-800 hover:text-emerald-600 transition-colors"
+                className="p-2 text-gray-800 rounded-full hover:bg-gray-100 transition-all duration-300"
               >
                 <X size={24} strokeWidth={2} />
               </button>
             </div>
 
-            <ul className="flex flex-col items-start space-y-8">
-              {navItems.map((item) => (
-                <li key={item.label}>
+            {/* Menu items with staggered animation */}
+            <ul className="flex flex-col space-y-6">
+              {navItems.map((item, index) => (
+                <li
+                  key={item.label}
+                  className="overflow-hidden"
+                  style={{ transitionDelay: `${index * 75}ms` }}
+                >
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className={`text-2xl font-semibold ${getTextColor(
-                      item.id
-                    )}`}
+                    className={`w-full text-left text-2xl font-medium px-4 py-3 rounded-lg transition-all duration-300 transform ${
+                      activeSection === item.id
+                        ? "bg-emerald-100 text-emerald-600"
+                        : "text-gray-800 hover:bg-gray-100"
+                    } ${
+                      isMenuOpen
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-8 opacity-0"
+                    }`}
                   >
                     {item.label}
                   </button>
                 </li>
               ))}
             </ul>
+
+            {/* Optional footer */}
+            <div className="mt-auto pt-8 border-t border-gray-100">
+              <p className="text-gray-500 text-sm">© 2024 Agroturism Bori</p>
+            </div>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };
