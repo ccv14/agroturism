@@ -19,14 +19,13 @@ const Header = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log(entry.target.id, entry.isIntersecting); // Add logging to track the section
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
           }
         });
       },
       {
-        threshold: 0.3, // Adjust this
+        threshold: 0.3,
         rootMargin: "-20px 0px",
       }
     );
@@ -53,19 +52,22 @@ const Header = () => {
 
   // Unified style function for text colors
   const getTextColor = (id: string) => {
-    const baseColor = isScrolled ? "text-gray-800" : "text-white";
-    const activeColor = "text-emerald-600";
+    const activeColor = "text-emerald-600"; // Active color (green)
+    const baseColor = isScrolled ? "text-black" : "text-white"; // Default color for links changes to black if scrolled
+    const mobileBaseColor = "text-gray-800"; // Mobile color, set to a darker shade for visibility
+    const color = isMenuOpen ? mobileBaseColor : baseColor; // If menu is open, use mobileBaseColor
+
     return `transition-colors duration-300 ${
-      activeSection === id ? activeColor : baseColor
+      activeSection === id ? activeColor : color
     } hover:text-emerald-600`;
   };
 
   return (
-    <header className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 w-full">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-transparent transition-all duration-500 ease-in-out">
       <div
-        className={`transition-all duration-500 rounded-full px-6 py-3 mx-auto max-w-7xl ${
+        className={`${
           isScrolled ? "bg-white shadow-lg" : "bg-transparent"
-        }`}
+        } rounded-full px-6 py-3 mx-auto max-w-7xl transition-all duration-500`}
       >
         <div className="flex items-center justify-between">
           {/* Logo Section */}
@@ -75,7 +77,6 @@ const Header = () => {
               alt="Logo"
               className="h-8 w-8 object-contain"
             />
-            {/* Agroturism Bori text color logic */}
             <span
               className={`font-bold text-xl ${
                 isScrolled ? "text-gray-800" : "text-white"
@@ -101,9 +102,9 @@ const Header = () => {
           {/* Mobile Menu Toggle */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsMenuOpen(true)}
-              aria-label="Open menu"
-              className={getTextColor(activeSection)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              className={`${isScrolled ? "text-black" : "text-white"}`} // Hamburger button becomes black on scroll
             >
               <Menu size={24} strokeWidth={2} />
             </button>
@@ -113,26 +114,34 @@ const Header = () => {
 
       {/* Mobile Navigation Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-white bg-opacity-95 flex flex-col items-center justify-center transition-all duration-300 ease-in-out z-50">
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Close menu"
-            className="absolute top-6 right-6 text-gray-800 hover:text-emerald-600 transition-colors"
-          >
-            <X size={24} strokeWidth={2} />
-          </button>
-          <ul className="space-y-8 text-center">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <button
-                  onClick={() => scrollToSection(item.id)}
-                  className={`text-2xl ${getTextColor(item.id)}`}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
-          </ul>
+        <div className="fixed inset-0 z-50 flex">
+          {/* Side menu */}
+          <div className="bg-white w-[30%] h-full p-6 space-y-8 flex flex-col justify-start">
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
+                className="text-gray-800 hover:text-emerald-600 transition-colors"
+              >
+                <X size={24} strokeWidth={2} />
+              </button>
+            </div>
+
+            <ul className="flex flex-col items-start space-y-8">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={`text-2xl font-semibold ${getTextColor(
+                      item.id
+                    )}`}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </header>
