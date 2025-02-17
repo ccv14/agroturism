@@ -4,10 +4,9 @@ import { useSwipeable } from "react-swipeable";
 
 const images = [
   "/images/mancare4.jpg",
-  "/images/mancare2.JPEG",
+  "/images/mancare2.jpg",
   "/images/mancare5.jpg",
 ];
-
 const Carousel = () => {
   const [index, setIndex] = useState(0);
 
@@ -35,7 +34,7 @@ const Carousel = () => {
         <img
           src={images[index]}
           alt="Carousel"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover min-h-[300px]"
         />
       </motion.div>
 
@@ -61,93 +60,102 @@ const Carousel = () => {
 
 const About = () => {
   return (
-    <div className="w-full min-h-screen flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-emerald-50 to-gray-50">
+    <div className="w-full min-h-screen flex items-center bg-gradient-to-br p-4 sm:p-6">
       <motion.div
-        className="w-full max-w-7xl bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl overflow-hidden flex flex-col lg:flex-row mx-4"
+        className="w-full bg-white shadow-2xl overflow-hidden flex flex-col lg:flex-row rounded-2xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Text Section */}
         <motion.div
-          className="flex-1 p-6 sm:p-8 lg:p-12"
+          className="flex-1 p-6 sm:p-10 lg:p-12 xl:p-14"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
           <div className="space-y-4 sm:space-y-6">
-            <motion.h2
-              className="text-3xl sm:text-4xl font-bold text-emerald-800 font-serif"
+            <motion.div
+              className="space-y-3"
               initial={{ y: 10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-emerald-400">
+              <h2 className="text-3xl sm:text-4xl font-bold text-black font-serif leading-tight">
                 Agroturism Bori
-              </span>
-              <br />
-              <span className="text-xl sm:text-2xl text-gray-600">
-                Punct Gastronomic Local
-              </span>
-            </motion.h2>
+                <br />
+                <span className="text-xl sm:text-2xl text-gray-800 font-sans font-medium mt-2 block">
+                  Punct Gastronomic Local
+                </span>
+              </h2>
+              <p className="text-lg sm:text-xl text-gray-900 leading-relaxed border-l-4 border-gray-300 pl-4 italic font-serif">
+                „Te invităm să descoperi o oază de tradiții autentice, unde
+                fiecare masă este o poveste.”
+              </p>
+            </motion.div>
 
             <motion.div
-              className="space-y-4 sm:space-y-6 text-gray-700"
+              className="space-y-4 sm:space-y-6 text-black"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <p className="text-base sm:text-lg leading-relaxed border-l-4 border-emerald-100 pl-4 italic">
-                „Te invităm să descoperi o oază de tradiții autentice, unde
-                fiecare masă este o poveste.”
-              </p>
-
-              <div className="space-y-3 sm:space-y-4">
-                {[
-                  {
-                    title: "Locație unică",
-                    text:
-                      "În inima Gura Humorului, cu vedere la peisaje impresionante",
-                  },
-                  {
-                    title: "Bucate tradiționale",
-                    text:
-                      "Sarmale, mămăligă cu brânză de oi, plăcinte proaspete",
-                  },
-                  {
-                    title: "Ingrediente locale",
-                    text:
-                      "Produse de casă și ingrediente din gospodăriile partenere",
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-2 sm:gap-3">
-                    <div className="mt-1 w-2 h-2 bg-emerald-400 rounded-full flex-shrink-0" />
-                    <p className="text-sm sm:text-base">
-                      <strong className="text-emerald-600">
-                        {item.title}:
-                      </strong>{" "}
+              {[
+                {
+                  title: "Locație unică",
+                  text:
+                    "În inima Gura Humorului, cu vedere la peisaje impresionante",
+                },
+                {
+                  title: "Bucate tradiționale",
+                  text: "Sarmale, mămăligă cu brânză de oi, plăcinte proaspete",
+                },
+                {
+                  title: "Ingrediente locale",
+                  text:
+                    "Produse de casă și ingrediente din gospodăriile partenere",
+                },
+                {
+                  title: "Turism rural",
+                  text:
+                    "Se practică turism rural autentic, oferind o experiență tradițională și relaxantă.",
+                },
+                {
+                  title: "Experiență unică pentru copii",
+                  text:
+                    "Copiii se vor bucura de interacțiuni directe cu animalele, într-un mediu natural și plin de aventuri.",
+                },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-3 sm:gap-4 group"
+                >
+                  <div className="mt-1.5 w-3 h-3 bg-gray-700 rounded-full flex-shrink-0 ring-4 ring-gray-200" />
+                  <p className="text-lg sm:text-xl leading-relaxed">
+                    <strong className="text-black font-semibold">
+                      {item.title}
+                    </strong>
+                    <span className="block text-gray-800 mt-1 sm:mt-1.5">
                       {item.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                    </span>
+                  </p>
+                </div>
+              ))}
+            </motion.div>
 
-              <motion.div
-                className="mt-6 sm:mt-8 p-3 sm:p-4 bg-emerald-50 rounded-lg sm:rounded-xl"
-                whileHover={{ scale: 1.02 }}
-              >
-                <p className="text-center text-sm sm:text-lg font-medium">
-                  „O experiență gastronomică care trezește amintiri și creează
-                  momente de neuitat!”
-                </p>
-              </motion.div>
+            <motion.div
+              className="mt-6 sm:mt-8 p-5 sm:p-6 bg-gray-50 rounded-xl border border-gray-100"
+              whileHover={{ scale: 1.02 }}
+            >
+              <p className="text-center text-lg sm:text-xl text-gray-900 italic font-serif leading-relaxed">
+                „O experiență gastronomică care trezește amintiri și creează
+                momente de neuitat!”
+              </p>
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Carousel Section */}
         <motion.div
-          className="flex-1 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-100"
+          className="flex-1 relative aspect-[4/3] lg:aspect-[3/4] xl:aspect-square"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}

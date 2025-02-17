@@ -56,14 +56,14 @@ const Header = () => {
     { label: "Reviews", id: "reviews" },
   ];
 
-  // Text color generator
+  // Funcție pentru generarea culorii textului, adăugând și font-ul personalizat
   const getTextColor = (id: string) => {
     const activeColor = "text-emerald-600";
     const baseColor = isScrolled ? "text-black" : "text-white";
     const mobileBaseColor = "text-gray-800";
     const color = isMenuOpen ? mobileBaseColor : baseColor;
 
-    return `transition-colors duration-300 ${
+    return `font-poppins transition-colors duration-300 ${
       activeSection === id ? activeColor : color
     } hover:text-emerald-600`;
   };
@@ -84,7 +84,7 @@ const Header = () => {
               className="h-8 w-8 object-contain transition-transform duration-300 hover:scale-110"
             />
             <span
-              className={`font-bold text-xl ${
+              className={`font-poppins font-bold text-xl ${
                 isScrolled ? "text-gray-800" : "text-white"
               }`}
             >
@@ -142,7 +142,7 @@ const Header = () => {
                 alt="Logo"
                 className="h-8 w-8 object-contain"
               />
-              <span className="text-2xl font-bold text-gray-800">
+              <span className="font-poppins text-2xl font-bold text-gray-800">
                 Agroturism Bori
               </span>
             </div>
@@ -168,7 +168,7 @@ const Header = () => {
                 >
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full text-left text-2xl font-medium px-4 py-3 rounded-lg transition-all duration-300 transform ${
+                    className={`w-full text-left text-2xl font-poppins font-medium px-4 py-3 rounded-lg transition-all duration-300 transform ${
                       activeSection === item.id
                         ? "bg-emerald-100 text-emerald-600"
                         : "text-gray-800 hover:bg-gray-100"
@@ -186,7 +186,9 @@ const Header = () => {
 
             {/* Optional footer */}
             <div className="mt-auto pt-8 border-t border-gray-100">
-              <p className="text-gray-500 text-sm">© 2024 Agroturism Bori</p>
+              <p className="font-poppins text-gray-500 text-sm">
+                © 2024 Agroturism Bori
+              </p>
             </div>
           </div>
         </div>

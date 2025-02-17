@@ -5,6 +5,7 @@ import ImageCarousel from "./components/ImageCarousel";
 import BookingForm from "./components/BookingForm";
 import { Toaster } from "react-hot-toast";
 import About from "./components/About";
+import Footer from "./components/Footer";
 
 const cabinImages = [
   {
@@ -194,6 +195,9 @@ function App() {
           </div>
         </section>
       </main>
+      <section id="footer">
+        <Footer />
+      </section>
     </div>
   );
 }
