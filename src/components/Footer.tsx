@@ -121,33 +121,31 @@ const Footer = () => {
 
           {/* Quick Links Section */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">
-              Legături rapide
-            </h4>
+            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <nav className="space-y-2">
               <a
-                href="#"
+                href="#home"
                 className="block text-sm hover:text-emerald-300 transition-colors"
               >
-                Despre noi
+                Home
               </a>
               <a
-                href="#"
+                href="#more"
                 className="block text-sm hover:text-emerald-300 transition-colors"
               >
-                Camere
+                Mai multe despre noi
               </a>
               <a
-                href="#"
+                href="#booking"
                 className="block text-sm hover:text-emerald-300 transition-colors"
               >
-                Galerie
+                Fa o rezervare
               </a>
               <a
-                href="#"
+                href="#reviews"
                 className="block text-sm hover:text-emerald-300 transition-colors"
               >
-                Contact
+                Reviews
               </a>
             </nav>
           </div>
@@ -175,12 +173,8 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className="border-t border-emerald-800 mt-12 pt-8 text-center">
           <div className="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
-            <a href="#" className="text-emerald-300 hover:text-white">
-              Politica de confidențialitate
-            </a>
-            <a href="#" className="text-emerald-300 hover:text-white">
-              Termeni și condiții
-            </a>
+            <a href="#" className="text-emerald-300 hover:text-white"></a>
+            <a href="#" className="text-emerald-300 hover:text-white"></a>
             <span className="text-emerald-300">
               &copy; {new Date().getFullYear()} Agroturism Bori
             </span>
