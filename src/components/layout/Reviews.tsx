@@ -88,10 +88,10 @@ const Reviews: React.FC = () => {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-b from-green-50 to-white">
+    <section className="py-16 bg-gradient-to-b">
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
-          Opinii oamenilor despre Agroturism Bori
+          Opiniile oamenilor despre Agroturism Bori
         </h2>
 
         <div className="relative group">

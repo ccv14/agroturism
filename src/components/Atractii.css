@@ -1,0 +1,49 @@
+/* Container for each attraction */
+.attraction-container {
+    position: relative;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Styling for the image */
+  .attraction-image {
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .attraction-container:hover .attraction-image {
+    transform: scale(1.05);
+  }
+  
+  /* Styling for content */
+  .attraction-content {
+    padding: 1.5rem;
+  }
+  
+  /* Title styling */
+  .attraction-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+  }
+  
+  /* Hidden by default */
+  .attraction-description {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  
+  /* Expanded state */
+  .attraction-description.expanded {
+    height: auto;
+    opacity: 1;
+  }
+  

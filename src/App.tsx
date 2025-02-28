@@ -8,6 +8,7 @@ import About from "./components/About";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import Reviews from "./components/layout/Reviews";
+import Attractions from "./components/Atractii";
 const cabinImages = [
   {
     url: "assets/img/first.jpg",
@@ -28,27 +29,6 @@ const cabinImages = [
   {
     url: "assets/img/fifth.jpg",
     alt: "Mountain view",
-  },
-];
-
-const attractions = [
-  {
-    title: 'Mânăstirea "Voroneț”',
-    description:
-      "Numită și “Capela Sixtină a Estului”, Mănăstirea Voroneț impresionează prin picturile sale cu totul deosebite",
-    image: "assets/img/manasitre.jpg",
-  },
-  {
-    title: "Rezervatia paleontologica si geologica Piatra Soimului",
-    description:
-      "Are o lungime de 1462 metri, cu un grad de dificultate mediu, diferenta de nivel fiind de 283 metri",
-    image: "assets/img/piatra-soimului.jpg",
-  },
-  {
-    title: "Festivalul International “Toamna la Voronet”",
-    description:
-      "Este un festival de film, care se desfasoara anual, in luna octombrie, la Voronet",
-    image: "assets/img/festival.jpg",
   },
 ];
 
@@ -76,36 +56,11 @@ function App() {
             </div>
 
             <section id="about">
-              <About /> {/* This will render your About section */}
+              <About /> {/*About section <-*/}
             </section>
-
-            <div className="mb-12 sm:mb-16 md:mb-20">
-              <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
-                Atracții Locale
-              </h3>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                {attractions.map((attraction, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:scale-[1.02]"
-                  >
-                    <img
-                      src={attraction.image}
-                      alt={attraction.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-4 sm:p-6">
-                      <h4 className="font-semibold text-lg sm:text-xl mb-2">
-                        {attraction.title}
-                      </h4>
-                      <p className="text-gray-600 text-sm sm:text-base">
-                        {attraction.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <section id="atractii">
+              <Attractions />
+            </section>
           </div>
         </section>
 
@@ -122,6 +77,7 @@ function App() {
           <Reviews />
         </section>
       </main>
+
       <section id="footer">
         <Footer />
       </section>

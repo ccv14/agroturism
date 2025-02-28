@@ -4,22 +4,18 @@ import { useInView } from "react-intersection-observer";
 
 const Hero = () => {
   const controls = useAnimation();
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
-  }, [controls, inView]);
+  }, [inView, controls]);
 
   const scrollToBooking = () => {
-    const element = document.getElementById("booking");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Varianta pentru animația textului
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -29,7 +25,6 @@ const Hero = () => {
     },
   };
 
-  // Varianta pentru animația butonului
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.95 },
     visible: {
@@ -39,7 +34,6 @@ const Hero = () => {
     },
   };
 
-  // Varianta pentru animația fundalului (zoom subtil)
   const bgVariants = {
     hidden: { opacity: 0, scale: 1.05 },
     visible: {
@@ -54,29 +48,25 @@ const Hero = () => {
       ref={ref}
       className="relative h-[calc(100vh-4rem)] md:h-screen overflow-hidden"
     >
-      {/* Imaginea de fundal */}
       <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-b-3xl shadow-2xl transition-transform duration-500 ease-out"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-b-3xl shadow-2xl"
         style={{
           backgroundImage: 'url("assets/img/heroImg.jpg")',
           filter: "brightness(0.65)",
         }}
         variants={bgVariants}
         initial="hidden"
-        animate="visible"
-        whileHover={{ scale: 1.07 }}
+        animate={controls}
       >
-        {/* Suprapunere gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 rounded-b-3xl" />
       </motion.div>
 
-      {/* Conținutul textului */}
       <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 text-center px-4">
         <motion.div
           className="max-w-3xl"
           initial="hidden"
           animate={controls}
-          transition={{ staggerChildren: 0.3 }}
+          variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
         >
           <motion.h1
             variants={textVariants}
@@ -115,7 +105,6 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Indicatorul de scroll */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <motion.div
           className="w-6 h-10 rounded-full border border-white/50 flex items-center justify-center p-1"
