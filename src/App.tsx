@@ -48,16 +48,10 @@ function App() {
               Descoperă Agroturism Bori
             </h2>
 
-            <div className="mb-12 sm:mb-16 md:mb-20">
-              <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
-                Galerie
-              </h3>
-              <ImageCarousel images={cabinImages} />
-            </div>
-
             <section id="about">
               <About /> {/*About section <-*/}
             </section>
+
             <section id="atractii">
               <Attractions />
             </section>

@@ -1,169 +1,150 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { useSwipeable } from "react-swipeable";
-
-const images = [
-  "/images/mancare4.jpg",
-  "/images/mancare2.jpg",
-  "/images/mancare5.jpg",
-];
-const Carousel = () => {
-  const [index, setIndex] = useState(0);
-
-  const prevImage = () =>
-    setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  const nextImage = () =>
-    setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-
-  const handlers = useSwipeable({
-    onSwipedLeft: nextImage,
-    onSwipedRight: prevImage,
-    trackMouse: true,
-  });
-
-  return (
-    <div {...handlers} className="relative w-full h-full overflow-hidden group">
-      <motion.div
-        key={index}
-        className="absolute inset-0 w-full h-full"
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -100 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-      >
-        <img
-          src={images[index]}
-          alt="Carousel"
-          className="w-full h-full object-cover min-h-[300px]"
-        />
-      </motion.div>
-
-      <div className="absolute inset-0 flex items-center justify-between p-2 sm:p-4">
-        <motion.button
-          onClick={prevImage}
-          className="bg-white/80 backdrop-blur-sm p-2 sm:p-3 rounded-full shadow-lg hover:bg-white transition-all text-sm sm:text-base"
-          whileHover={{ scale: 1.1 }}
-        >
-          ◀
-        </motion.button>
-        <motion.button
-          onClick={nextImage}
-          className="bg-white/80 backdrop-blur-sm p-2 sm:p-3 rounded-full shadow-lg hover:bg-white transition-all text-sm sm:text-base"
-          whileHover={{ scale: 1.1 }}
-        >
-          ▶
-        </motion.button>
-      </div>
-    </div>
-  );
-};
+import Stack from "./Stack/Stack";
 
 const About = () => {
+  const features = [
+    "Produse 100% locale și organice",
+    "Spații climatizate",
+    "Parcare privată",
+    "Accesibilitate persoane cu dizabilități",
+    "Wi-Fi gratuit",
+    "Activități educative pentru copii",
+  ];
+
   return (
-    <div className="w-full min-h-screen flex items-center bg-gradient-to-br p-4 sm:p-6">
+    <section className="w-full min-h-[60vh] md:min-h-[80vh] py-12">
       <motion.div
-        className="w-full bg-white shadow-2xl overflow-hidden flex flex-col lg:flex-row rounded-2xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        className="max-w-8xl mx-auto grid lg:grid-cols-2 gap-6 lg:gap-12 items-center px-4 sm:px-6"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
       >
-        <motion.div
-          className="flex-1 p-6 sm:p-10 lg:p-12 xl:p-14"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <div className="space-y-4 sm:space-y-6">
-            <motion.div
-              className="space-y-3"
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <h2 className="text-3xl sm:text-4xl font-bold text-black font-serif leading-tight">
-                Agroturism Bori
-                <br />
-                <span className="text-xl sm:text-2xl text-gray-800 font-sans font-medium mt-2 block">
-                  Punct Gastronomic Local
-                </span>
-              </h2>
-              <p className="text-lg sm:text-xl text-gray-900 leading-relaxed border-l-4 border-gray-300 pl-4 italic font-serif">
-                „Te invităm să descoperi o oază de tradiții autentice, unde
-                fiecare masă este o poveste.”
-              </p>
-            </motion.div>
+        {/* Wrapped images in Stack */}
+        <Stack className="relative h-[400px] sm:h-[500px] md:h-[600px] order-first lg:-ml-8">
+          {/* Top Image */}
+          <motion.div
+            className="absolute w-full h-[60%] md:w-[85%] md:h-[85%] left-0 top-0 rounded-lg md:rounded-xl overflow-hidden shadow-lg z-10"
+            whileHover={{ scale: 1.02 }}
+          >
+            <img
+              src="/images/mancare4.jpg"
+              alt="Preparate tradiționale Bori"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </motion.div>
 
-            <motion.div
-              className="space-y-4 sm:space-y-6 text-black"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              {[
-                {
-                  title: "Locație unică",
-                  text:
-                    "În inima Gura Humorului, cu vedere la peisaje impresionante",
-                },
-                {
-                  title: "Bucate tradiționale",
-                  text: "Sarmale, mămăligă cu brânză de oi, plăcinte proaspete",
-                },
-                {
-                  title: "Ingrediente locale",
-                  text:
-                    "Produse de casă și ingrediente din gospodăriile partenere",
-                },
-                {
-                  title: "Turism rural",
-                  text:
-                    "Se practică turism rural autentic, oferind o experiență tradițională și relaxantă.",
-                },
-                {
-                  title: "Experiență unică pentru copii",
-                  text:
-                    "Copiii se vor bucura de interacțiuni directe cu animalele, într-un mediu natural și plin de aventuri.",
-                },
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start gap-3 sm:gap-4 group"
+          {/* Bottom Image */}
+          <motion.div
+            className="absolute w-full h-[60%] md:w-[85%] md:h-[85%] right-0 bottom-0 rounded-lg md:rounded-xl overflow-hidden shadow-lg"
+            initial={{ rotate: 3 }}
+            whileInView={{ rotate: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            <img
+              src="/images/mancare2.jpg"
+              alt="Interior agroturism Bori"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </motion.div>
+        </Stack>
+
+        {/* Text Section */}
+        <motion.article
+          className="space-y-6 md:space-y-8 text-black lg:pl-8 xl:pl-12"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <motion.header
+            className="space-y-4 md:space-y-5"
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-serif leading-tight">
+              Agroturism Bori
+              <span className="block text-xl sm:text-2xl md:text-3xl mt-2 md:mt-4 font-sans font-medium text-emerald-600">
+                Oază de tradiție în inima Bucovinei
+              </span>
+            </h1>
+            <div className="w-16 md:w-24 h-1 md:h-1.5 bg-emerald-600 rounded-full" />
+            <p className="text-lg md:text-xl leading-relaxed text-gray-600 italic mt-4 md:mt-6 max-w-2xl">
+              „La noi, fiecare masă e o poveste și fiecare oaspete devine parte
+              din familie”
+            </p>
+          </motion.header>
+
+          {/* Responsive Features Grid */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ staggerChildren: 0.1 }}
+          >
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="flex items-center gap-3 p-3 md:p-4 bg-emerald-50 rounded-lg md:rounded-xl border border-emerald-100 hover:border-emerald-200 transition-colors"
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+              >
+                <svg
+                  className="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 text-emerald-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <div className="mt-1.5 w-3 h-3 bg-gray-700 rounded-full flex-shrink-0 ring-4 ring-gray-200" />
-                  <p className="text-lg sm:text-xl leading-relaxed">
-                    <strong className="text-black font-semibold">
-                      {item.title}
-                    </strong>
-                    <span className="block text-gray-800 mt-1 sm:mt-1.5">
-                      {item.text}
-                    </span>
-                  </p>
-                </div>
-              ))}
-            </motion.div>
+                  <motion.path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </svg>
+                <span className="text-base md:text-lg text-gray-800">
+                  {feature}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
 
-            <motion.div
-              className="mt-6 sm:mt-8 p-5 sm:p-6 bg-gray-50 rounded-xl border border-gray-100"
-              whileHover={{ scale: 1.02 }}
-            >
-              <p className="text-center text-lg sm:text-xl text-gray-900 italic font-serif leading-relaxed">
-                „O experiență gastronomică care trezește amintiri și creează
-                momente de neuitat!”
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="flex-1 relative aspect-[4/3] lg:aspect-[3/4] xl:aspect-square"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <Carousel />
-        </motion.div>
+          {/* Responsive Description */}
+          <motion.div
+            className="space-y-3 md:space-y-4 text-base md:text-lg text-gray-700 max-w-3xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <p>
+              Așezat în poalele Carpaților, Agroturism Bori te invită la o
+              experiență autentică:
+            </p>
+            <ul className="space-y-2 md:space-y-3 pl-4 md:pl-6">
+              <li className="relative before:content-['▹'] before:absolute before:-left-4 md:before:-left-5 before:top-1 before:text-emerald-600">
+                Bucătărie tradițională cu rețete transmise generații la rând
+              </li>
+              <li className="relative before:content-['▹'] before:absolute before:-left-4 md:before:-left-5 before:top-1 before:text-emerald-600">
+                Turism eco-responsabil și practici sustenabile
+              </li>
+              <li className="relative before:content-['▹'] before:absolute before:-left-4 md:before:-left-5 before:top-1 before:text-emerald-600">
+                Workshop-uri de meșteșuguri populare
+              </li>
+              <li className="relative before:content-['▹'] before:absolute before:-left-4 md:before:-left-5 before:top-1 before:text-emerald-600">
+                Povești de-a dreptul din sufletul Bucovinei
+              </li>
+            </ul>
+          </motion.div>
+        </motion.article>
       </motion.div>
-    </div>
+    </section>
   );
 };
 
