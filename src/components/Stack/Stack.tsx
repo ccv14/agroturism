@@ -137,6 +137,7 @@ export default function Stack({
           ? Math.random() * (isMobile ? 4 : 8) - (isMobile ? 2 : 4)
           : 0;
         return (
+          // Inside the cards.map loop where each card is rendered
           <CardRotate
             key={card.id}
             onSendToBack={() => sendToBack(card.id)}
@@ -144,28 +145,31 @@ export default function Stack({
             isMobile={isMobile}
           >
             <motion.div
-              className="rounded-lg md:rounded-xl overflow-hidden border-2 md:border-[3px] border-white shadow-lg"
+              className="rounded-lg md:rounded-xl overflow-hidden border-2 md:border-[3px] border-white shadow-lg relative"
               onClick={() => sendToBackOnClick && sendToBack(card.id)}
               animate={{
                 rotateZ: (cards.length - index - 1) * fanSpread + randomRotate,
-                scale: 1, // fixed scale ensures all cards have the same dimensions
+                scale: 1,
                 transformOrigin: "90% 90%",
-              }}
-              initial={false}
-              transition={{
-                type: "spring",
-                stiffness: animationConfig.stiffness,
-                damping: animationConfig.damping,
               }}
               style={{ width: dimensions.width, height: dimensions.height }}
             >
+              {/* Image */}
               <img
                 src={card.img}
                 alt={`Card ${card.id}`}
                 className="w-full h-full object-cover pointer-events-none"
-                loading={index > 2 ? "lazy" : "eager"}
-                sizes="(max-width: 768px) 300px, 600px"
               />
+
+              {/* Drag text overlay */}
+              <motion.div
+                className="absolute bottom-4 left-1/3 lg:left-[36%] transform -translate-x-1/2 lg:translate-x-0 text-center text-white text-sm sm:text-base px-4 py-2 bg-black/80 rounded-lg backdrop-blur-sm z-50 shadow-xl w-max"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                {index === cards.length - 1 ? "Drag to explore" : ""}
+              </motion.div>
             </motion.div>
           </CardRotate>
         );

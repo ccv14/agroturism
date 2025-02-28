@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import ImageCarousel from "./components/ImageCarousel";
 import BookingForm from "./components/BookingForm";
 import { Toaster } from "react-hot-toast";
 import About from "./components/About";
@@ -9,28 +8,6 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import Reviews from "./components/layout/Reviews";
 import Attractions from "./components/Atractii";
-const cabinImages = [
-  {
-    url: "assets/img/first.jpg",
-    alt: "Cozy cabin exterior",
-  },
-  {
-    url: "assets/img/second.jpg",
-    alt: "Cabin interior",
-  },
-  {
-    url: "assets/img/third.jpg",
-    alt: "Mountain view",
-  },
-  {
-    url: "assets/img/fourth.jpg",
-    alt: "Mountain view",
-  },
-  {
-    url: "assets/img/fifth.jpg",
-    alt: "Mountain view",
-  },
-];
 
 function App() {
   return (
