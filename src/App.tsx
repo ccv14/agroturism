@@ -35,7 +35,7 @@ function App() {
           </div>
         </section>
 
-        <section id="booking" className="py-12 sm:py-16 md:py-20">
+        <section id="booking" className="py-12 sm:py-16 md:py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">
               Fă o rezervare

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const Attractions: React.FC = () => {
   const attractions = [
@@ -47,42 +48,80 @@ const Attractions: React.FC = () => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
+  // Variants for the container: fades in and staggers children.
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 },
+    },
+  };
+
+  // Variants for each child element: fade in and slide up.
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 14,
+        duration: 0.7,
+      },
+    },
+  };
+
   return (
     <section id="attractions" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">
+      {/* Section Title */}
+      <motion.h3
+        className="text-3xl font-bold text-center mb-12 text-gray-800"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
         Atracții Locale
-      </h3>
+      </motion.h3>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Cards Grid */}
+      <motion.div
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, margin: "-100px" }}
+      >
         {attractions.map((attraction, index) => (
-          <div
+          <motion.div
             key={index}
-            className={`relative rounded-2xl overflow-hidden bg-white shadow-lg hover:shadow-xl cursor-pointer transition-all duration-500`}
+            className="relative rounded-2xl overflow-hidden bg-white shadow-lg hover:shadow-xl cursor-pointer transition-all duration-500"
             onClick={() => toggleExpand(index)}
+            variants={childVariants}
           >
             <img
               src={attraction.image}
               alt={attraction.title}
               className="w-full h-56 object-cover transition-transform duration-500"
             />
-
             <div className="p-6">
               <h4 className="text-2xl font-bold text-gray-800 mb-4">
                 {attraction.title}
               </h4>
-              <div
+              <motion.div
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
                   expandedIndex === index
                     ? "max-h-96 opacity-100 translate-y-0"
                     : "max-h-0 opacity-0 -translate-y-4"
                 }`}
+                variants={childVariants}
               >
                 <p className="text-gray-600 mt-2">{attraction.description}</p>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
