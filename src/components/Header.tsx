@@ -1,53 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  }, [isMenuOpen]);
-
-  // Scroll handler
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 0);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Intersection Observer for sections
-  useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "-20px 0px" }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-      setActiveSection(sectionId);
-    }
-  };
+const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState<string>("home");
 
   const navItems = [
     { label: "Home", id: "home" },
@@ -57,143 +15,210 @@ const Header = () => {
     { label: "Reviews", id: "reviews" },
   ];
 
-  // Funcție pentru generarea culorii textului, adăugând și font-ul personalizat
-  const getTextColor = (id: string) => {
-    const activeColor = "text-emerald-600";
-    const baseColor = isScrolled ? "text-black" : "text-white";
-    const mobileBaseColor = "text-gray-800";
-    const color = isMenuOpen ? mobileBaseColor : baseColor;
+  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    document.body.classList.toggle("overflow-hidden", isMenuOpen);
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [isMenuOpen]);
 
+  // Update scroll state for header background change
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // IntersectionObserver: determine the active section based on highest visibility
+  useEffect(() => {
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+      if (visibleEntries.length > 0) {
+        const maxEntry = visibleEntries.reduce((prev, current) =>
+          prev.intersectionRatio > current.intersectionRatio ? prev : current
+        );
+        setActiveSection((maxEntry.target as HTMLElement).id);
+      }
+    };
+
+    const observerOptions: IntersectionObserverInit = {
+      threshold: Array.from(Array(11), (_, i) => i / 10), // [0, 0.1, ..., 1]
+      rootMargin: "0px",
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+    const sectionIds = navItems.map((item) => item.id);
+    const sections = Array.from(
+      document.querySelectorAll("section")
+    ).filter((section) => sectionIds.includes(section.id));
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [navItems]);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false);
+  };
+
+  // Determine the text color based on scroll state and active section
+  const getTextColor = (id: string) => {
+    const baseColor = isScrolled ? "text-gray-800" : "text-white";
     return `font-poppins transition-colors duration-300 ${
-      activeSection === id ? activeColor : color
-    } hover:text-emerald-600`;
+      activeSection === id ? "text-emerald-600" : baseColor
+    }`;
+  };
+
+  const navItemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-transparent transition-all duration-500 ease-in-out">
-      <div
-        className={`${
-          isScrolled ? "bg-white shadow-lg" : "bg-transparent"
-        } rounded-full px-6 py-3 mx-auto max-w-7xl transition-all duration-500`}
-      >
-        <div className="flex items-center justify-between">
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        isScrolled ? "bg-white shadow-lg" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
-          <div className="flex items-center space-x-3">
+          <motion.div
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
+          >
             <img
               src="assets/img/logo.png"
               alt="Logo"
-              className="h-8 w-8 object-contain transition-transform duration-300 hover:scale-110"
+              className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform"
             />
             <span
-              className={`font-poppins font-bold text-xl ${
+              className={`font-poppins text-xl sm:text-2xl font-bold ${
                 isScrolled ? "text-gray-800" : "text-white"
               }`}
             >
               Agroturism Bori
             </span>
-          </div>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.id)}
-                className={getTextColor(item.id)}
-              >
-                {item.label}
-              </button>
-            ))}
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+            <ul className="flex space-x-6 lg:space-x-8">
+              {navItems.map((item, index) => (
+                <motion.li
+                  key={item.id}
+                  variants={navItemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={`${getTextColor(
+                      item.id
+                    )} hover:text-emerald-500 text-sm lg:text-base`}
+                  >
+                    {item.label}
+                    {activeSection === item.id && (
+                      <motion.div
+                        className="h-0.5 bg-emerald-600 mt-1"
+                        layoutId="activeSection"
+                        transition={{ type: "spring", stiffness: 500 }}
+                      />
+                    )}
+                  </button>
+                </motion.li>
+              ))}
+            </ul>
           </nav>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden">
+          <div className="flex md:hidden items-center gap-4">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-              className={`${
-                isScrolled ? "text-black" : "text-white"
-              } transition-transform duration-300 hover:scale-110`}
+              className={`p-2 ${isScrolled ? "text-gray-800" : "text-white"}`}
             >
-              <Menu size={24} strokeWidth={2} />
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation Overlay */}
-      <div
-        className={`fixed inset-0 z-40 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-          isMenuOpen
-            ? "bg-black/30 backdrop-blur-sm pointer-events-auto"
-            : "bg-transparent backdrop-blur-none pointer-events-none"
-        }`}
-      >
-        {/* Side menu with sliding animation */}
-        <div
-          className={`absolute left-0 top-0 h-full w-3/4 max-w-sm bg-white shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-            isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-        >
-          <div className="flex flex-col h-full p-6">
-            {/* Logo and Name at the Top */}
-            <div className="flex items-center space-x-3 mb-8">
-              <img
-                src="assets/img/logo.png"
-                alt="Logo"
-                className="h-8 w-8 object-contain"
-              />
-              <span className="font-poppins text-2xl font-bold text-gray-800">
-                Agroturism Bori
-              </span>
-            </div>
-
-            {/* Close button */}
-            <div className="flex justify-end mb-8">
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                aria-label="Close menu"
-                className="p-2 text-gray-800 rounded-full hover:bg-gray-100 transition-all duration-300"
-              >
-                <X size={24} strokeWidth={2} />
-              </button>
-            </div>
-
-            {/* Menu items with staggered animation */}
-            <ul className="flex flex-col space-y-6">
-              {navItems.map((item, index) => (
-                <li
-                  key={item.label}
-                  className="overflow-hidden"
-                  style={{ transitionDelay: `${index * 75}ms` }}
-                >
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "tween" }}
+              className="w-3/4 max-w-xs bg-white h-full shadow-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex flex-col h-full p-4">
+                <div className="flex justify-between items-center mb-8">
+                  <div className="flex items-center space-x-2">
+                    <img
+                      src="assets/img/logo.png"
+                      alt="Logo"
+                      className="h-10 w-10"
+                    />
+                    <span className="font-poppins text-xl font-bold text-gray-800">
+                      Agroturism Bori
+                    </span>
+                  </div>
                   <button
-                    onClick={() => scrollToSection(item.id)}
-                    className={`w-full text-left text-2xl font-poppins font-medium px-4 py-3 rounded-lg transition-all duration-300 transform ${
-                      activeSection === item.id
-                        ? "bg-emerald-100 text-emerald-600"
-                        : "text-gray-800 hover:bg-gray-100"
-                    } ${
-                      isMenuOpen
-                        ? "translate-x-0 opacity-100"
-                        : "-translate-x-8 opacity-0"
-                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 text-gray-800"
                   >
-                    {item.label}
+                    <X className="w-6 h-6" />
                   </button>
-                </li>
-              ))}
-            </ul>
+                </div>
 
-            {/* Optional footer */}
-            <div className="mt-auto pt-8 border-t border-gray-100">
-              <p className="font-poppins text-gray-500 text-sm">
-                © 2024 Agroturism Bori
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+                <nav className="flex-1">
+                  <ul className="space-y-4">
+                    {navItems.map((item) => (
+                      <li key={item.id}>
+                        <button
+                          onClick={() => scrollToSection(item.id)}
+                          className={`w-full text-left px-4 py-3 rounded-lg text-lg ${
+                            activeSection === item.id
+                              ? "bg-emerald-100 text-emerald-600"
+                              : "text-gray-800 hover:bg-gray-100"
+                          }`}
+                        >
+                          {item.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+
+                <div className="mt-auto pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-500">
+                    © 2024 Agroturism Bori
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

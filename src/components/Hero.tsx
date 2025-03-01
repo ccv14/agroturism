@@ -46,10 +46,10 @@ const Hero = () => {
   return (
     <div
       ref={ref}
-      className="relative h-[calc(100vh-4rem)] md:h-screen overflow-hidden"
+      className="relative h-[calc(100vh-4rem)] md:h-screen overflow-hidden "
     >
       <motion.div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-b-3xl shadow-2xl"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-b-3xl shadow- shadow-bottom  "
         style={{
           backgroundImage: 'url("assets/img/heroImg.jpg")',
           filter: "brightness(0.65)",
@@ -61,7 +61,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80 rounded-b-3xl" />
       </motion.div>
 
-      <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 text-center px-4">
+      <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 text-center px-4 ">
         <motion.div
           className="max-w-3xl"
           initial="hidden"
@@ -84,7 +84,7 @@ const Hero = () => {
           <motion.div variants={buttonVariants}>
             <button
               onClick={scrollToBooking}
-              className="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white px-6 md:px-8 py-3 rounded-lg text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-700/40 group"
+              className="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white px-6 md:px-8 py-3 rounded-lg text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-700/40 group "
             >
               <span>Fă o rezervare</span>
               <svg

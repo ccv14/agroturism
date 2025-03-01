@@ -15,26 +15,29 @@ function App() {
       <Toaster position="top-center" />
       <Header />
       <main>
+        {/* Secțiunea Home */}
         <section id="home">
           <Hero />
         </section>
 
+        {/* Secțiunea More – acum conține doar About */}
         <section id="more" className="py-12 sm:py-16 md:py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">
               Descoperă Agroturism Bori
             </h2>
-
-            <section id="about">
-              <About /> {/*About section <-*/}
-            </section>
-
-            <section id="atractii">
-              <Attractions />
-            </section>
+            <About />
           </div>
         </section>
 
+        {/* Secțiunea Attractions – separată */}
+        <section id="atractii" className="py-12 sm:py-16 md:py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <Attractions />
+          </div>
+        </section>
+
+        {/* Secțiunea Booking */}
         <section id="booking" className="py-12 sm:py-16 md:py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">
@@ -44,11 +47,13 @@ function App() {
           </div>
         </section>
 
+        {/* Secțiunea Reviews */}
         <section id="reviews" className="py-12 sm:py-16 md:py-20 bg-gray-50">
           <Reviews />
         </section>
       </main>
 
+      {/* Footer */}
       <section id="footer">
         <Footer />
       </section>
