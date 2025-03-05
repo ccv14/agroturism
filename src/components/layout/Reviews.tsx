@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../LanguageContent";
+import { translations } from "../translations";
 
 type Review = {
   author_name: string;
@@ -10,6 +12,9 @@ type Review = {
 };
 
 const Reviews: React.FC = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const [reviews, setReviews] = useState<Review[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -55,18 +60,18 @@ const Reviews: React.FC = () => {
         if (response.data?.reviews) {
           setReviews(response.data.reviews);
         } else {
-          setError("Datele nu au putut fi încărcate.");
+          setError(t.reviews.errors.fetchError);
         }
       } catch (error) {
-        setError("Vă rugăm să încercați mai târziu.");
-        console.error("Eroare la încărcarea recenziilor:", error);
+        setError(t.reviews.errors.networkError);
+        console.error("Error fetching reviews:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchReviews();
-  }, []);
+  }, [t]);
 
   const getInitials = (name: string) => {
     const names = name.split(" ");
@@ -128,7 +133,7 @@ const Reviews: React.FC = () => {
       >
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-800">
-            Opinii oamenilor despre Agroturism Bori
+            {t.reviews.title}
           </h2>
           <p className="text-red-500 text-lg">{error}</p>
         </div>
@@ -148,21 +153,16 @@ const Reviews: React.FC = () => {
         {/* Persuasive Text Section */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
           <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Descoperă Experiența Autentică Bucovineană
+            {t.reviews.heading}
           </h2>
           <div className="max-w-3xl mx-auto text-xl text-gray-600 space-y-4">
             <p>
-              La Agroturism Bori, fiecare oaspete devine parte din povestea
-              noastră. Cu o evaluare medie de <strong>4.9/5 stele</strong> pe
-              Google, suntem mândri să fim recomandați de peste 95% dintre
-              vizitatorii noștri.
+              {t.reviews.description}
+              <strong>{t.reviews.rating}</strong>
+              {t.reviews.recommendation}
             </p>
             <div className="grid md:grid-cols-3 gap-6 mt-8">
-              {[
-                "100% Produse Locale",
-                "Experiențe Autentice",
-                "Ospitalitate Premium",
-              ].map((item) => (
+              {t.reviews.features.map((item: string) => (
                 <motion.div
                   key={item}
                   className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
@@ -284,10 +284,10 @@ const Reviews: React.FC = () => {
           variants={itemVariants}
         >
           <p className="text-sm">
-            Toate recenziile sunt preluate direct de la clienții noștri prin
+            {t.reviews.trustBadge.text}
             <span className="text-emerald-600 font-semibold">
               {" "}
-              Google Reviews
+              {t.reviews.trustBadge.googleReviews}
             </span>
           </p>
           <div className="mt-4 flex justify-center items-center space-x-2">
@@ -297,7 +297,7 @@ const Reviews: React.FC = () => {
                 d="M12 0L3 7l1.6 13.1L12 24l7.4-3.9L21 7z"
               />
             </svg>
-            <span className="text-sm">Verificat și Securizat</span>
+            <span className="text-sm">{t.reviews.trustBadge.verified}</span>
           </div>
         </motion.div>
       </div>

@@ -1,42 +1,41 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "./LanguageContent";
+import { translations } from "./translations";
 
 const Attractions: React.FC = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const attractions = [
     {
-      title: "Mânăstirea Voroneț",
-      description:
-        "Supranumită 'Capela Sixtină a Estului', Mânăstirea Voroneț este faimoasă pentru frescele sale vibrante și albastrul unic, care nu și-a pierdut strălucirea de-a lungul secolelor. A fost construită în 1488 de Ștefan cel Mare și reprezintă unul dintre cele mai impresionante monumente religioase din România.",
+      title: t.attractions.voronet.title,
+      description: t.attractions.voronet.description,
       image: "assets/img/manasitre.jpg",
     },
     {
-      title: "Piatra Șoimului",
-      description:
-        "O rezervație naturală spectaculoasă, Piatra Șoimului oferă priveliști uimitoare asupra munților și văilor din împrejurimi. Este un loc ideal pentru iubitorii de drumeții și escaladă, cu trasee accesibile pentru toate nivelurile de experiență.",
+      title: t.attractions.piatraSoimului.title,
+      description: t.attractions.piatraSoimului.description,
       image: "assets/img/piatra-soimului.jpg",
     },
     {
-      title: "Festivalul Toamna la Voroneț",
-      description:
-        "Un eveniment anual care aduce în prim-plan cultura locală, muzica, gastronomia tradițională și proiecțiile de film. Festivalul oferă o atmosferă autentică, atrăgând turiști din întreaga țară și din străinătate.",
+      title: t.attractions.festival.title,
+      description: t.attractions.festival.description,
       image: "assets/img/festival.jpg",
     },
     {
-      title: "Muzeul Satului Bucovinean",
-      description:
-        "O incursiune în trecutul regiunii Bucovina, muzeul prezintă case tradiționale, biserici din lemn și ateliere meșteșugărești. Este un loc ideal pentru a înțelege mai bine tradițiile și modul de viață al locuitorilor din această zonă istorică.",
+      title: t.attractions.muzeu.title,
+      description: t.attractions.muzeu.description,
       image: "assets/img/satul-bucovinean.webp",
     },
     {
-      title: "Cascada Cailor",
-      description:
-        "Cea mai înaltă cascadă din România, având o cădere de apă de aproximativ 90 de metri. Situată în Munții Rodnei, cascada este accesibilă printr-o drumeție spectaculoasă sau cu telescaunul din stațiunea Borșa.",
+      title: t.attractions.cascada.title,
+      description: t.attractions.cascada.description,
       image: "assets/img/Cascada-cailor.webp",
     },
     {
-      title: "Cheile Bicazului",
-      description:
-        "Una dintre cele mai impresionante formațiuni geologice din România, cu pereți abrupți și un peisaj spectaculos. Cheile Bicazului sunt un paradis pentru alpiniști și iubitorii de natură, oferind trasee spectaculoase și peisaje de neuitat.",
+      title: t.attractions.cheileBicazului.title,
+      description: t.attractions.cheileBicazului.description,
       image: "assets/img/Cheile-bicazului.webp",
     },
   ];
@@ -44,11 +43,9 @@ const Attractions: React.FC = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const toggleExpand = (index: number) => {
-    // Toggle one card at a time
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
-  // Variants for the container: fades in and staggers children.
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -57,7 +54,6 @@ const Attractions: React.FC = () => {
     },
   };
 
-  // Variants for each child element: fade in and slide up.
   const childVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -74,17 +70,15 @@ const Attractions: React.FC = () => {
 
   return (
     <section id="attractions" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      {/* Section Title */}
       <motion.h3
         className="text-3xl font-bold text-center mb-12 text-gray-800"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
-        Atracții Locale
+        {t.sections.attractions}
       </motion.h3>
 
-      {/* Cards Grid */}
       <motion.div
         className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         variants={containerVariants}

@@ -1,4 +1,11 @@
+import React from "react";
+import { useLanguage } from "./LanguageContent";
+import { translations } from "./translations";
+
 const Footer = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const socialLinks = [
     {
       name: "Facebook",
@@ -20,8 +27,7 @@ const Footer = () => {
     },
     {
       name: "Booking",
-      url:
-        "https://www.booking.com/hotel/ro/pensiunea-bori.ro.html?aid=397594&label=gog235jc-1DCAEoggI46AdIIFgDaMABiAEBmAEguAEXyAEP2AED6AEB-AECiAIBqAIDuAL_28y9BsACAdICJGQ5ZWE2YWFlLWRlMzgtNGQ4YS04YTZmL-WJmYmJhNmY1YzgwNtgCBOACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=null&group_children=0&req_children=0",
+      url: "https://www.booking.com/hotel/ro/pensiunea-bori.ro.html",
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" />
@@ -33,20 +39,22 @@ const Footer = () => {
   return (
     <footer className="bg-emerald-900 text-gray-100 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <h3 className="text-2xl font-serif font-bold text-white">
-              Agroturism Bori
+              {t.footer.brandTitle}
             </h3>
             <p className="text-sm text-emerald-100 leading-relaxed">
-              Oază de tradiții și savoare autentică în inima Bucovinei
+              {t.footer.brandDescription}
             </p>
           </div>
 
           {/* Contact Section */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Contact</h4>
+            <h4 className="text-lg font-semibold text-white">
+              {t.footer.contactTitle}
+            </h4>
             <ul className="space-y-2">
               <li className="flex items-center">
                 <svg
@@ -87,7 +95,7 @@ const Footer = () => {
                   href="mailto:contact@agroturismbori.ro"
                   className="text-sm hover:text-emerald-300 transition-colors"
                 >
-                  contact@agroturismbori.ro
+                  stefancuandreiii86@yahoo.ro
                 </a>
               </li>
               <li className="flex items-start">
@@ -110,49 +118,34 @@ const Footer = () => {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                <span className="text-sm">
-                  Satul Bori, <br />
-                  Gura Humorului, <br />
-                  Județul Suceava
-                </span>
+                <span className="text-sm">{t.footer.address}</span>
               </li>
             </ul>
           </div>
 
           {/* Quick Links Section */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-white">
+              {t.footer.quickLinksTitle}
+            </h4>
             <nav className="space-y-2">
-              <a
-                href="#home"
-                className="block text-sm hover:text-emerald-300 transition-colors"
-              >
-                Home
-              </a>
-              <a
-                href="#more"
-                className="block text-sm hover:text-emerald-300 transition-colors"
-              >
-                Mai multe despre noi
-              </a>
-              <a
-                href="#booking"
-                className="block text-sm hover:text-emerald-300 transition-colors"
-              >
-                Fa o rezervare
-              </a>
-              <a
-                href="#reviews"
-                className="block text-sm hover:text-emerald-300 transition-colors"
-              >
-                Reviews
-              </a>
+              {t.footer.quickLinks.map((link) => (
+                <a
+                  key={link.text}
+                  href={link.url}
+                  className="block text-sm hover:text-emerald-300 transition-colors"
+                >
+                  {link.text}
+                </a>
+              ))}
             </nav>
           </div>
 
           {/* Social Media Section */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Social Media</h4>
+            <h4 className="text-lg font-semibold text-white">
+              {t.footer.socialMediaTitle}
+            </h4>
             <div className="flex space-x-4">
               {socialLinks.map((link) => (
                 <a
@@ -173,10 +166,8 @@ const Footer = () => {
         {/* Copyright Section */}
         <div className="border-t border-emerald-800 mt-12 pt-8 text-center">
           <div className="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
-            <a href="#" className="text-emerald-300 hover:text-white"></a>
-            <a href="#" className="text-emerald-300 hover:text-white"></a>
             <span className="text-emerald-300">
-              &copy; {new Date().getFullYear()} Agroturism Bori
+              &copy; {new Date().getFullYear()} {t.footer.copyright}
             </span>
           </div>
         </div>

@@ -1,19 +1,74 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "./LanguageContent";
+
+// Helper component to render flag icons using inline SVG
+const FlagIcon: React.FC<{ lang: "ro" | "en"; className?: string }> = ({
+  lang,
+  className,
+}) => {
+  return lang === "ro" ? (
+    <svg
+      viewBox="0 0 3 2"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <rect width="1" height="2" fill="#002B7F" />
+      <rect width="1" height="2" x="1" fill="#FCD116" />
+      <rect width="1" height="2" x="2" fill="#CE1126" />
+    </svg>
+  ) : (
+    <svg
+      viewBox="0 0 60 30"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <clipPath id="t">
+        <path d="M0,0 v30 h60 v-30 z" />
+      </clipPath>
+      <g clipPath="url(#t)">
+        <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFF" strokeWidth="6" />
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" />
+        <path d="M30,0 v30 M0,15 h60" stroke="#FFF" strokeWidth="10" />
+        <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" strokeWidth="6" />
+      </g>
+    </svg>
+  );
+};
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("home");
+  const [showLangOptions, setShowLangOptions] = useState<boolean>(false);
 
-  const navItems = [
+  // Get language context
+  const { language, setLanguage } = useLanguage();
+
+  // Language-specific nav items
+  const navItemsEN = [
     { label: "Home", id: "home" },
     { label: "More", id: "more" },
     { label: "Attractions", id: "atractii" },
     { label: "Booking", id: "booking" },
     { label: "Reviews", id: "reviews" },
   ];
+  const navItemsRO = [
+    { label: "Acasă", id: "home" },
+    { label: "Mai multe", id: "more" },
+    { label: "Atracții", id: "atractii" },
+    { label: "Rezervări", id: "booking" },
+    { label: "Recenzii", id: "reviews" },
+  ];
+  const navItems = language === "ro" ? navItemsRO : navItemsEN;
+
+  // Function to update language and close dropdown
+  const selectLanguage = (lang: "ro" | "en") => {
+    setLanguage(lang);
+    setShowLangOptions(false);
+  };
 
   // Lock scroll when mobile menu is open
   useEffect(() => {
@@ -41,7 +96,7 @@ const Header: React.FC = () => {
     };
 
     const observerOptions: IntersectionObserverInit = {
-      threshold: Array.from(Array(11), (_, i) => i / 10), // [0, 0.1, ..., 1]
+      threshold: Array.from(Array(11), (_, i) => i / 10),
       rootMargin: "0px",
     };
 
@@ -77,6 +132,58 @@ const Header: React.FC = () => {
     hidden: { opacity: 0, y: -10 },
     visible: { opacity: 1, y: 0 },
   };
+
+  // Improved Language Switcher Component
+  const LanguageSwitcher = () => (
+    <div className="relative">
+      <button
+        onClick={() => setShowLangOptions(!showLangOptions)}
+        className={`flex items-center space-x-2 p-2 rounded-lg transition-all duration-200 ${
+          isScrolled
+            ? "bg-white hover:bg-gray-100"
+            : "bg-white/20 hover:bg-white/30 backdrop-blur-sm"
+        }`}
+      >
+        <FlagIcon lang={language} className="w-5 h-5" />
+        <ChevronDown
+          className={`w-4 h-4 transition-transform ${
+            showLangOptions ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {showLangOptions && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 mt-2 w-32 bg-white border border-gray-100 rounded-lg shadow-lg overflow-hidden"
+          >
+            <button
+              onClick={() => selectLanguage("ro")}
+              className={`w-full px-4 py-2 flex items-center space-x-2 hover:bg-gray-50 ${
+                language === "ro" ? "bg-gray-50" : ""
+              }`}
+            >
+              <FlagIcon lang="ro" className="w-5 h-5" />
+              <span>Română</span>
+            </button>
+            <button
+              onClick={() => selectLanguage("en")}
+              className={`w-full px-4 py-2 flex items-center space-x-2 hover:bg-gray-50 ${
+                language === "en" ? "bg-gray-50" : ""
+              }`}
+            >
+              <FlagIcon lang="en" className="w-5 h-5" />
+              <span>English</span>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 
   return (
     <header
@@ -134,13 +241,19 @@ const Header: React.FC = () => {
                 </motion.li>
               ))}
             </ul>
+            <LanguageSwitcher />
           </nav>
 
           {/* Mobile Menu Toggle */}
           <div className="flex md:hidden items-center gap-4">
+            <LanguageSwitcher />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 ${isScrolled ? "text-gray-800" : "text-white"}`}
+              className={`p-2 rounded-lg transition-all ${
+                isScrolled
+                  ? "bg-white hover:bg-gray-100"
+                  : "bg-white/20 hover:bg-white/30 backdrop-blur-sm"
+              }`}
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
