@@ -64,9 +64,11 @@ export const translations = {
       },
       form: {
         name: "Nume complet",
-        namePlaceholder: "Numele tău",
+        namePlaceholder: "Numele Dumneavoastra",
         email: "Adresă de email",
         emailPlaceholder: "email@example.com",
+        phone: "Numar de Telefon",
+        phonePlaceholder: "Numarul dumneavoastra de telefon...",
         message: "Mesajul tău",
         messagePlaceholder:
           "Descrie-ne data dorită și orice cerințe speciale...",
@@ -184,9 +186,11 @@ export const translations = {
       },
       form: {
         name: "Full Name",
-        namePlaceholder: "Your name",
+        namePlaceholder: "Your Name",
         email: "Email Address",
         emailPlaceholder: "email@example.com",
+        phone: "Phone Number",
+        phonePlaceholder: "Your phone number...",
         message: "Your Message",
         messagePlaceholder:
           "Tell us about your desired stay dates and any special requests...",

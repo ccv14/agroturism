@@ -75,8 +75,8 @@ const Hero = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-2 md:mb-4 drop-shadow-lg"
           >
             {language === "ro"
-              ? "Cabana Agroturism Bori"
-              : "Agrotourism Bori Cabin"}
+              ? "Agroturism Bori Punct Gastronomic Local"
+              : "Agrotourism Bori Local Gastronomic Point"}
           </motion.h1>
           <motion.p
             variants={textVariants}

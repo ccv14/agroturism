@@ -71,10 +71,10 @@ const Footer = () => {
                   />
                 </svg>
                 <a
-                  href="tel:+40712345678"
+                  href="tel:+40741680696"
                   className="text-sm hover:text-emerald-300 transition-colors"
                 >
-                  +40 712 345 678
+                  +40 741 680 696
                 </a>
               </li>
               <li className="flex items-center">
@@ -95,7 +95,7 @@ const Footer = () => {
                   href="mailto:contact@agroturismbori.ro"
                   className="text-sm hover:text-emerald-300 transition-colors"
                 >
-                  stefancuandreiii86@yahoo.ro
+                  stefancuandrei86@gmail.com
                 </a>
               </li>
               <li className="flex items-start">

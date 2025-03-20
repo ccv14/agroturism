@@ -43,27 +43,38 @@ const BookingForm: React.FC = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !message) {
+    if (!name || !email || !phone || !message) {
       toast.error(t.booking.errors.requiredFields);
       return;
     }
 
     try {
       setIsLoading(true);
+      
+      // Make sure your EmailJS template uses these variable names:
+      // {{from_name}}, {{from_email}}, {{phone}}, {{subject}}, and {{message}}
       await emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        { from_name: name, from_email: email, message },
-        "YOUR_USER_ID"
+        "service_lldwklo",
+        "template_muvv7yo",
+        { 
+          name: name, 
+          email: email, 
+          phone: phone,
+          subject: `Rezervare nouă de la ${name}`,
+          message: message  // Updated to "message" instead of "content"
+        },
+        "37XDiqJe34x7Lv9-O" // Replace with your actual EmailJS Public Key/User ID
       );
       toast.success(t.booking.success);
       setName("");
       setEmail("");
+      setPhone("");
       setMessage("");
     } catch (error) {
       toast.error(t.booking.errors.general);
@@ -80,7 +91,7 @@ const BookingForm: React.FC = () => {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={childVariants}
-        className="text-4xl font-bold text-center mb-8 bg-gradient-to-r text-black bg-clip-text "
+        className="text-4xl font-bold text-center mb-8 bg-gradient-to-r text-black bg-clip-text"
       >
         {t.booking.pageTitle}
       </motion.h1>
@@ -146,6 +157,28 @@ const BookingForm: React.FC = () => {
                     placeholder={t.booking.form.emailPlaceholder}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-emerald-200/50 focus:border-emerald-500 placeholder-slate-400/80 transition-all duration-300 hover:border-emerald-400 shadow-sm bg-white/80"
+                    required
+                  />
+                </motion.div>
+
+                {/* Phone Input */}
+                <motion.div 
+                  className="space-y-2 col-span-1 md:col-span-2" 
+                  variants={childVariants}
+                >
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-slate-700/90"
+                  >
+                    {t.booking.form.phone}
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder={t.booking.form.phonePlaceholder}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-emerald-200/50 focus:border-emerald-500 placeholder-slate-400/80 transition-all duration-300 hover:border-emerald-400 shadow-sm bg-white/80"
                     required
                   />
@@ -300,10 +333,10 @@ const BookingForm: React.FC = () => {
                       {t.booking.contact.email}
                     </p>
                     <a
-                      href="mailto:stefancuandreiii86@yahoo.ro"
+                      href="mailto:stefancuandrei86@gmail.com"
                       className="text-slate-600/90 text-sm hover:text-emerald-600 transition-colors"
                     >
-                      stefancuandreiii86@yahoo.ro
+                      stefancuandrei86@gmail.com
                     </a>
                   </div>
                 </motion.div>
@@ -378,3 +411,4 @@ const BookingForm: React.FC = () => {
 };
 
 export default BookingForm;
+ 
