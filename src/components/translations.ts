@@ -1,3 +1,4 @@
+// translations.js
 export const translations = {
   ro: {
     about: {
@@ -6,6 +7,14 @@ export const translations = {
       subtitle: "Oază de tradiție în inima Bucovinei",
       quote:
         "„La noi, fiecare masă e o poveste și fiecare oaspete devine parte din familie”",
+      description:
+        "Așezat în poalele Carpaților, Agroturism Bori te invită la o experiență autentică:",
+        experienceList: [
+          "Bucătărie tradițională cu rețete transmise generații la rând",
+          "Turism eco-responsabil și practici sustenabile",
+          "Workshop-uri de meșteșuguri populare",
+          "Povești de-a dreptul din sufletul Bucovinei",
+        ],
     },
     features: {
       localProducts: "Produse 100% locale și organice",
@@ -64,11 +73,11 @@ export const translations = {
       },
       form: {
         name: "Nume complet",
-        namePlaceholder: "Numele Dumneavoastra",
+        namePlaceholder: "Numele Dumneavoastră",
         email: "Adresă de email",
         emailPlaceholder: "email@example.com",
-        phone: "Numar de Telefon",
-        phonePlaceholder: "Numarul dumneavoastra de telefon...",
+        phone: "Număr de Telefon",
+        phonePlaceholder: "Numărul dumneavoastră de telefon...",
         message: "Mesajul tău",
         messagePlaceholder:
           "Descrie-ne data dorită și orice cerințe speciale...",
@@ -128,6 +137,14 @@ export const translations = {
       subtitle: "A traditional oasis in the heart of Bucovina",
       quote:
         "„With us, every meal is a story and every guest becomes part of the family”",
+      description:
+        "Nestled at the foothills of the Carpathians, Agrotourism Bori invites you to an authentic experience:",
+        experienceList: [
+          "Traditional kitchen with recipes passed down through generations",
+          "Eco-responsible tourism and sustainable practices",
+          "Popular crafts workshops",
+          "Stories straight from the heart of Bucovina",
+        ],
     },
     features: {
       localProducts: "100% local and organic products",

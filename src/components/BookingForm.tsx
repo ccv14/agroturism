@@ -164,25 +164,41 @@ const BookingForm: React.FC = () => {
 
                 {/* Phone Input */}
                 <motion.div 
-                  className="space-y-2 col-span-1 md:col-span-2" 
-                  variants={childVariants}
-                >
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-slate-700/90"
-                  >
-                    {t.booking.form.phone}
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    placeholder={t.booking.form.phonePlaceholder}
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-emerald-200/50 focus:border-emerald-500 placeholder-slate-400/80 transition-all duration-300 hover:border-emerald-400 shadow-sm bg-white/80"
-                    required
-                  />
-                </motion.div>
+  className="space-y-2 col-span-1 md:col-span-2" 
+  variants={childVariants}
+>
+  <label
+    htmlFor="phone"
+    className="block text-sm font-medium text-slate-700/90"
+  >
+    {t.booking.form.phone}
+  </label>
+  <input
+    type="tel"
+    id="phone"
+    placeholder={t.booking.form.phonePlaceholder}
+    value={phone}
+    onChange={(e) => {
+      const numericValue = e.target.value.replace(/[^0-9+]/g, ""); // Allow only numbers and '+'
+      setPhone(numericValue);
+    }}
+    onKeyDown={(e) => {
+      if (
+        !/[0-9]/.test(e.key) && 
+        e.key !== "Backspace" && 
+        e.key !== "ArrowLeft" && 
+        e.key !== "ArrowRight" && 
+        e.key !== "+" // Allow "+"
+      ) {
+        e.preventDefault();
+      }
+    }}
+    inputMode="tel" // Mobile phone keyboard
+    pattern="[0-9+]*" // Ensure only numbers and '+'
+    className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-emerald-200/50 focus:border-emerald-500 placeholder-slate-400/80 transition-all duration-300 hover:border-emerald-400 shadow-sm bg-white/80"
+    required
+  />
+</motion.div>
               </motion.div>
 
               {/* Message Input */}

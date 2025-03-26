@@ -53,7 +53,7 @@ const Hero = () => {
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-b-3xl shadow- shadow-bottom"
         style={{
-          backgroundImage: 'url("assets/img/heroImg.jpg")',
+          backgroundImage: 'url("/img/heroImg.jpg")',
           filter: "brightness(0.65)",
         }}
         variants={bgVariants}

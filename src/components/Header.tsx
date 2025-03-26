@@ -238,7 +238,7 @@ const Header: React.FC = () => {
             whileHover={{ scale: 1.05 }}
           >
             <img
-              src="assets/img/logo.png"
+              src="/img/logo.png"
               alt="Logo"
               className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition-transform"
             />

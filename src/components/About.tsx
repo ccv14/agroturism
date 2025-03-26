@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import Stack from "./Stack/Stack";
-import { useLanguage } from "./LanguageContent"; // Corrected import path
-import { translations } from "./translations"; // Import translations
+import { useLanguage } from "./LanguageContent";
+import { translations } from "./translations";
 
 const About = () => {
   const { language } = useLanguage();
-  const t = translations[language]; // Get translations for current language
+  const t = translations[language];
 
   const features = [
     t.features.localProducts,
@@ -28,7 +28,6 @@ const About = () => {
 
   return (
     <section className="w-full min-h-[60vh] md:min-h-[80vh] py-12">
-      {/* New Title Section */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -46,7 +45,7 @@ const About = () => {
         transition={{ duration: 0.5 }}
         viewport={{ once: false, margin: "-100px" }}
       >
-        {/* Image Stack Section */}
+        {/* Image Stack Section - remains unchanged */}
         <motion.div
           className="order-first lg:-ml-8"
           initial={{ opacity: 0, y: 20 }}
@@ -128,7 +127,7 @@ const About = () => {
             </motion.p>
           </motion.header>
 
-          {/* Description List */}
+          {/* Updated Description List */}
           <motion.div
             className="space-y-3 md:space-y-4 text-base md:text-lg text-gray-700 max-w-3xl"
             variants={childVariants}
@@ -138,19 +137,13 @@ const About = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.4 }}
             >
-              Așezat în poalele Carpaților, Agroturism Bori te invită la o
-              experiență autentică:
+              {t.about.description}
             </motion.p>
             <motion.ul
               className="space-y-2 md:space-y-3 pl-4 md:pl-6"
               variants={containerVariants}
             >
-              {[
-                "Bucătărie tradițională cu rețete transmise generații la rând",
-                "Turism eco-responsabil și practici sustenabile",
-                "Workshop-uri de meșteșuguri populare",
-                "Povești de-a dreptul din sufletul Bucovinei",
-              ].map((item, index) => (
+              {t.about.experienceList.map((item, index) => (
                 <motion.li
                   key={index}
                   className="relative before:content-['▹'] before:absolute before:-left-4 md:before:-left-5 before:top-1 before:text-emerald-600"
@@ -163,7 +156,7 @@ const About = () => {
             </motion.ul>
           </motion.div>
 
-          {/* Features Grid */}
+          {/* Features Grid remains unchanged */}
           <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
             {features.map((feature, index) => (
               <motion.div

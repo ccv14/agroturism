@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "peak-bebop-451511-g4",
+  "private_key_id": "3716f50e6665156720799ec87e0803cd56816fd0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDJdzKdVnbL09aa\nluG+JpYOupIM8ngyuFuByH9eKzzFxJP4BqmzI50PPkxXqiXqdZNfk5m7YBzs7D+L\nc5dlU6NKrhkslNHqTc9GcuZA6uaU57giARtrLE1uDhRGTYKHaYqKFkcIZ/lmEdPA\n5lFDYaM42B5jL46m+bRKBl2BJmKltVYK9vO/9d2jPX/XtFofISnaCe1h44XIKamI\nFVj2o7A9RDxzXty0Q2dUpor33fBE149zdddjy+MTijoiWzUW0mX+E0IZP7C8MWI5\nHTxe2hFwBF5+apPFYjtBQqM0uXfdTdQP/qvj+PTuIoBndA52kjEzgjjkC7CawMgK\nn2nSRXYNAgMBAAECggEAFK+rz4p9g7PSdQiZkM4C+euvy+sIqwKRiMu2wktTv+XN\noLnEanu1aIeHzLeQkZi1g2qTLjFx/uTKKI47pSCXo3cpaBG21SVcq1noaRGFkBQT\n7M/qyhAgOjTxYX+bb76HRmL/s64DZnbdpJCxlubbXN6aDiqnrd71Y2Vwa+6uUd/U\nKONV4IG5cBhCz0Oue/drCQ4yAu+kvFk96IrtnV4fnbo4XtKCZZcpOVDpLpUIIpL4\nDCL0fEjTrPtB7GkuryqKAgItf2qGsB0wUr80/6z8IdIDstHtWHdfi9Cz6FBkHdPa\nPgI+IV6cxkCw7Bfw9dN7PQbyaChUHBPmr5g5XRa2QQKBgQD5UA+MeecCnca+XR02\nJmNoitN9qJXqsSt6aL4wy+EtE8BtUApAYoX7iIQkahqE+dw/daUwhnZFFepinacF\nUqhxddDoGuNLZaxUWIVOW0oFB7DXbaK5Wx2EUxfapawVD1PQz4PuKDNTrpTozXpL\nWsBie0KAPFrqxW0hCNVf4EcnTQKBgQDO3pab+oKyvaaA0vRuYyt9Xaj//xY/NQJ0\nQShDWM+oItDop1WXZgFL7/cz923GvnKGUnq3w/n7nxwCBl50DxmPxh6NjqDLAJEK\nRARye9Eb7UpBAaKEbsmFknIf1ohyobIlpd1B4+ED6Hb6gvlyPQYRAlSSQZzPI2s6\nmp7QcOupwQKBgQD2UKgcBPA8gH8z4rESp9i9F7OdyarcJdCr7sJBWZ0OOR57oYGP\nXQe8nILZq06qJGX6+JONHrvIw78/UT0LoD+1YU5VkwMPodMhvhduc/jsgU2xeas0\ncBX4f1Po/JfIcs0/V1akPGmBetG6NBBoVLAQXHE2WusEWqvX4G9XezExXQKBgQCw\nHYv3CtSOOysvbWkvOTpjJoOkPZTBBu4p7vbKLyfKqqlUCHGzzOG5tnesRC+vDaAO\nftV+8Vc3QoPjrWxoPhqy7iZAuXZmnPrd1H48wPCLZ/7ZTP0A5himoMCMHmZXwRUb\nPBQb7lc4roXsS+j1usIZZPR+92D6b9rwL4aZSik3gQKBgB1GvMbbQV8KD916PNQq\nmAY1w8a39SWqRLXSFTnckyWo/aTXwUiyoKZVKig1ImzNDQ3+Zthh2Hi1gNmR2gYi\nnn3hwHMLNMjOSZbU6NhGstiAzh/a8PSRf0/It1vzFGe9KLchxmWLSKguaEbXiVr5\nZeTTga7eccCSdqHvbfpYNWx9\n-----END PRIVATE KEY-----\n",
+  "client_email": "agroturismbori-com@peak-bebop-451511-g4.iam.gserviceaccount.com",
+  "client_id": "109063913917481666237",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/agroturismbori-com%40peak-bebop-451511-g4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

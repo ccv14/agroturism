@@ -79,14 +79,14 @@ export default function Stack({
     cardsData.length
       ? cardsData
       : [
-          { id: 5, img: "/images/mancare1.jpg" },
-          { id: 6, img: "/images/mancare2.jpg" },
-          { id: 7, img: "/images/mancare4.jpg" },
-          { id: 8, img: "/images/mancare5.jpg" },
-          { id: 1, img: "/images/imagine2.jpg" },
-          { id: 2, img: "/images/imagine3.jpg" },
-          { id: 3, img: "/images/imagine4.jpg" },
-          { id: 4, img: "/images/imagine6.jpg" },
+          { id: 5, img: "/dist/img/mancare1.jpg" },
+          { id: 6, img: "/dist/img/mancare2.jpg" },
+          { id: 7, img: "/dist/img/mancare4.jpg" },
+          { id: 8, img: "/dist/img/mancare5.jpg" },
+          { id: 1, img: "/dist/img/imagine2.jpg" },
+          { id: 2, img: "/dist/img/imagine3.jpg" },
+          { id: 3, img: "/dist/img/imagine4.jpg" },
+          { id: 4, img: "/dist/img/imagine6.jpg" },
         ]
   );
 
@@ -98,7 +98,7 @@ export default function Stack({
 
       if (mobile) {
         // For mobile, fixed dimensions (e.g., 300x400)
-        setDimensions({ width: 300, height: 400 });
+        setDimensions({ width: 220, height: 400 });
         setFanSpread(0.5);
       } else if (viewportWidth <= 1024) {
         // For tablets, fixed dimensions (e.g., 400x500)

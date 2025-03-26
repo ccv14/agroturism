@@ -11,32 +11,32 @@ const Attractions: React.FC = () => {
     {
       title: t.attractions.voronet.title,
       description: t.attractions.voronet.description,
-      image: "assets/img/manasitre.jpg",
+      image: "/img/manasitre.jpg",
     },
     {
       title: t.attractions.piatraSoimului.title,
       description: t.attractions.piatraSoimului.description,
-      image: "assets/img/piatra-soimului.jpg",
+      image: "/img/piatra-soimului.jpg",
     },
     {
       title: t.attractions.festival.title,
       description: t.attractions.festival.description,
-      image: "assets/img/festival.jpg",
+      image: "/img/festival.jpg",
     },
     {
       title: t.attractions.muzeu.title,
       description: t.attractions.muzeu.description,
-      image: "assets/img/satul-bucovinean.webp",
+      image: "/img/satul-bucovinean.webp",
     },
     {
       title: t.attractions.cascada.title,
       description: t.attractions.cascada.description,
-      image: "assets/img/Cascada-cailor.webp",
+      image: "/img/Cascada-cailor.webp",
     },
     {
       title: t.attractions.cheileBicazului.title,
       description: t.attractions.cheileBicazului.description,
-      image: "assets/img/Cheile-bicazului.webp",
+      image: "/img/Cheile-bicazului.webp",
     },
   ];
 
